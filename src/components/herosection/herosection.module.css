@@ -1,0 +1,139 @@
+.heroSection_wrapper {
+  position: relative;
+  background: url("../../assets/backgrounds/hero_bg1.jpg") no-repeat center center / cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  font-family: "Figtree", sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Mobile padding */
+@media (max-width: 768px) {
+  .heroSection_wrapper {
+    padding: 3rem 1rem;
+  }
+}
+
+/* Overlay for readability */
+.heroSection_wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.5);
+  z-index: 0;
+}
+
+.heroSection_inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  gap: 2rem;
+}
+
+.heroSection_left {
+  flex: 1;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroSection_heading {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #ffffff;
+  font-family: 'Figtree';
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.heroSection_gradientText {
+  color: #fff
+}
+
+.heroSection_tagline {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.heroSection_paragraph {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  color: #f2f2f2;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* CTA Button */
+.heroSection_button {
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgb(18, 95, 53);
+  border-radius: 20px;
+}
+
+.heroSection_button:hover {
+  background: rgb(66, 141, 82);
+}
+
+.arrowIcon {
+  font-size: 0.6rem;
+}
+
+
+/* Infinite floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .heroSection_inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroSection_left {
+    text-align: center;
+  }
+
+  .heroSection_right {
+    margin-top: 2rem;
+  }
+
+  .heroSection_heading {
+    font-size: 2.2rem;
+  }
+}

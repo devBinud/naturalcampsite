@@ -1,0 +1,120 @@
+.blogsSection {
+  padding: 50px 8%;
+  background: #f9fafb;
+  font-family: "Figtree", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mainHeadingTitle {
+  font-size: 1.875rem; /* ~30px */
+  font-weight: 600;
+  text-align: start;
+  margin-bottom: 1.5rem;
+  color: #002d39;
+}
+
+.viewAllBtn {
+  background-color: #fcd34d;
+  color: #002d39;
+  border: 2px solid #fcd34d;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: 0.3s ease-in-out;
+}
+
+.viewAllBtn:hover {
+  background-color: #002d39;
+  color: #fcd34d;
+  border-color: #002d39;
+}
+
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.blogCard {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.blogCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.blogImage {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.blogContent {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.blogTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #002d39;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.blogDesc {
+  font-size: 15px;
+  color: #4b5563;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.readMoreBtn {
+  align-self: flex-start;
+  background-color: #fcd34d;
+  color: #002d39;
+  border: 2px solid #fcd34d;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.readMoreBtn:hover {
+  background-color: #002d39;
+  color: #fcd34d;
+  border-color: #002d39;
+}
+
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .viewAllBtn {
+    display: none;
+  }
+}

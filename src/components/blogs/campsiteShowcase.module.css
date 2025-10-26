@@ -1,0 +1,115 @@
+.campsiteSection {
+  width: 100%;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  font-family: 'Montserrat', sans-serif;
+  color: #1e293b; /* soft dark text */
+  text-align: center;
+}
+
+.campsiteHeader {
+  margin-bottom: 50px;
+}
+
+.campsiteTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #267444ff; /* soft teal/blue for title */
+  margin-bottom: 12px;
+}
+
+.campsiteSubtitle {
+  font-size: 1rem;
+  color: #4b5563; /* medium gray for readability */
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.campsiteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.campsiteCard {
+  background: #fefefe; /* soft white card */
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* softer shadow */
+}
+
+.campsiteCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12); /* subtle hover shadow */
+}
+
+.campsiteImageWrapper {
+  position: relative;
+}
+
+.campsiteImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.campsitePrice {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: #fcd34d;
+  color: #1e293b; /* soft dark text */
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.campsiteContent {
+  padding: 20px 18px;
+  text-align: left;
+}
+
+.campsitePackageTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b; /* soft dark title */
+  margin-bottom: 8px;
+}
+
+.campsiteDescription {
+  font-size: 0.95rem;
+  color: #475569; /* softer gray for text */
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.amenitiesList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.amenityItem {
+  font-size: 0.9rem;
+  color: #6b7280; /* subtle gray */
+  margin-bottom: 4px;
+}
+
+.bookNowBtn {
+  background: #267444ff; /* soft sky blue */
+  color: #ffffff;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.bookNowBtn:hover {
+  background: rgb(55, 134, 86); /* lighter blue hover */
+  color: #fff;
+}

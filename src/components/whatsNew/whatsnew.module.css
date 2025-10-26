@@ -1,0 +1,189 @@
+/* =========================
+   WhatsNew Section Styles
+   ========================= */
+.whatsNew-section {
+  background-color: #f9fafb;
+  padding: 3.5rem 1.5rem;
+}
+
+.whatsNew-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.whatsNew-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #002d39;
+  Font-family: Figtree, sans-serif;
+  text-align: center;
+}
+.whatsNew-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #002d39;
+  Font-family: Figtree, sans-serif;
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+/* =========================
+   Grid Layout
+   ========================= */
+.whatsNew-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .whatsNew-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .whatsNew-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================
+   Card Styles
+   ========================= */
+.whatsNew-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+  cursor: default;
+}
+
+.whatsNew-card:hover .whatsNew-cardImage {
+  transform: scale(1.05);
+}
+
+.whatsNew-cardImage {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.whatsNew-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.4),
+    transparent
+  );
+}
+
+.whatsNew-cardContent {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  color: #fff;
+}
+
+.whatsNew-cardTag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: #facc15;
+  margin-bottom: 0.25rem;
+}
+
+.whatsNew-cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* =========================
+   Button Styles
+   ========================= */
+.whatsNew-buttonWrapper {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.whatsNew-button {
+  background-color: #facc15;
+  color: rgb(0, 45, 57);
+  padding: 0.75rem 2rem;
+  font-size:13px;
+  border-radius: 13px;
+  Font-family: Figtree, sans-serif;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.whatsNew-button:hover {
+  background-color: rgb(0, 45, 57);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  color:#e9e5e5
+}
+
+/* =========================
+   Video Card Styles
+   ========================= */
+.whatsNew-cardVideo {
+  cursor: pointer;
+}
+
+.whatsNew-cardVideo:hover .whatsNew-playIcon {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 1;
+}
+
+.whatsNew-playIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  color: #fff;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none; /* let clicks go to card */
+}
+
+.whatsNew-playIcon svg {
+  color: #ff0000; /* YouTube red */
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+
+.whatsNew-watchText {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  animation: pulse 1.8s infinite;
+}
+
+/* =========================
+   Animations
+   ========================= */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}

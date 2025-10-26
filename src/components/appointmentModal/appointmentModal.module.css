@@ -1,0 +1,120 @@
+/* Overlay background */
+.appointmentModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: appointmentModal-fadeIn 0.3s ease-in-out;
+}
+
+/* Modal container */
+.appointmentModal-modal {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: appointmentModal-slideUp 0.35s ease-in-out;
+}
+
+/* Title */
+.appointmentModal-title {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #222;
+}
+
+/* Close button */
+.appointmentModal-closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #444;
+  transition: color 0.2s ease;
+}
+
+.appointmentModal-closeButton:hover {
+  color: #d9534f;
+}
+
+/* Form */
+.appointmentModal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs & Textarea */
+.appointmentModal-input,
+.appointmentModal-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.25s ease;
+}
+
+.appointmentModal-input:focus,
+.appointmentModal-textarea:focus {
+  border: 1px solid #007bff;
+}
+
+/* Textarea */
+.appointmentModal-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Submit button */
+.appointmentModal-submit {
+  background: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.appointmentModal-submit:hover {
+  background: #0056b3;
+}
+
+/* Animations */
+@keyframes appointmentModal-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes appointmentModal-slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
