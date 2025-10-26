@@ -25,7 +25,7 @@ const PublicHome = () => {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/916901740874"
+        href="https://wa.me/918638220836"
         className="whatsapp-float"
         target="_blank"
         rel="noopener noreferrer"
