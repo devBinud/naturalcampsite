@@ -1,67 +1,40 @@
 import React, { useState } from 'react';
-import { getDatabase, ref, push } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import styles from './addproducts.module.css';
 
+// ===== Firebase (Dimaniwas Campsite) =====
 const firebaseConfig = {
-  apiKey: "AIzaSyAyoM6Lok3cRrogONmb5v10IYmwda1l4QY",
-  authDomain: "mrittikanaturals-e0674.firebaseapp.com",
-  projectId: "mrittikanaturals-e0674",
-  storageBucket: "mrittikanaturals-e0674.appspot.com",
-  messagingSenderId: "1074134155290",
-  appId: "1:1074134155290:web:9f6c837ba0fe32dcefd1a3",
-  measurementId: "G-GQ2JE9C3FD"
+  apiKey: "AIzaSyCMzZOz8D3BoMvN9m_gl4Bo02_xXw34gc4",
+  authDomain: "dimaniwascampsite.firebaseapp.com",
+  projectId: "dimaniwascampsite",
+  storageBucket: "dimaniwascampsite.appspot.com",
+  messagingSenderId: "465300324612",
+  appId: "1:465300324612:web:460b0bd13d2c92d3df9051"
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const db = getFirestore(app);
+// =======================================
 
 const AddProduct = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [product, setProduct] = useState({
+  const [tent, setTent] = useState({
     name: '',
-    slug: '',
-    category: '',
     description: '',
-    longDesc1: '',
-    longDesc2: '',
-    longDesc3: '',
-    mrp: '',
-    discount: '',
     price: ''
   });
-
   const [imageUrl, setImageUrl] = useState('');
 
-  const generateSlug = (name) =>
-    name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
-  const handleNameChange = (e) => {
-    const name = e.target.value;
-    setProduct((p) => ({
-      ...p,
-      name,
-      slug: generateSlug(name),
-    }));
-  };
-
-  const handleMrpOrDiscountChange = (field, value) => {
-    const updated = { ...product, [field]: value };
-    if (updated.mrp && updated.discount) {
-      const price = Math.round(
-        parseFloat(updated.mrp) -
-        (parseFloat(updated.mrp) * parseFloat(updated.discount)) / 100
-      );
-      updated.price = price.toString();
-    }
-    setProduct(updated);
+  const handleChange = (field, value) => {
+    setTent(prev => ({ ...prev, [field]: value }));
   };
 
   const handleUpload = () => {
     window.cloudinary.openUploadWidget(
       {
-        cloudName: 'dev-binudstorage',
-        uploadPreset: 'mrittika_unsigned',
+        cloudName: 'dev-binudstorage', // KEEP SAME
+        uploadPreset: 'mrittika_unsigned', // KEEP SAME
         sources: ['local'],
         multiple: false,
         cropping: false,
@@ -69,137 +42,86 @@ const AddProduct = () => {
       (error, result) => {
         if (!error && result.event === 'success') {
           setImageUrl(result.info.secure_url);
-        } else if (error) {
-          console.error('Upload Error:', error);
         }
       }
     );
   };
 
-  const handleSave = () => {
-    const { name, slug, category, description, mrp, price } = product;
-    if (!name || !slug || !category || !description || !mrp || !price || !imageUrl) {
-      alert('Please fill all required fields');
+  const handleSave = async () => {
+    if (!tent.name || !tent.description || !tent.price || !imageUrl) {
+      alert('Please fill all fields');
       return;
     }
 
-    const productsRef = ref(db, 'products');
-    push(productsRef, { ...product, image: imageUrl });
+    try {
+      await addDoc(collection(db, 'tents'), {
+        ...tent,
+        image: imageUrl,
+        createdAt: new Date()
+      });
 
-    alert('Product added successfully!');
-    setProduct({
-      name: '',
-      slug: '',
-      category: '',
-      description: '',
-      longDesc1: '',
-      longDesc2: '',
-      longDesc3: '',
-      mrp: '',
-      discount: '',
-      price: ''
-    });
-    setImageUrl('');
+      alert('Tent added successfully!');
+      setTent({ name: '', description: '', price: '' });
+      setImageUrl('');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to add tent');
+    }
   };
 
   return (
     <div className={`d-flex flex-column flex-md-row ${styles.container}`}>
-      {/* Toggle Button for Mobile */}
       <button className="btn btn-dark d-md-none m-2" onClick={() => setSidebarOpen(!sidebarOpen)}>
         ☰ Menu
       </button>
 
       {/* Sidebar */}
-      <div
-        className={`bg-dark text-white p-4 ${styles.sidebar} ${sidebarOpen ? 'd-block' : 'd-none'} d-md-block`}
-        style={{ fontFamily: 'Montserrat, sans-serif' }}
-      >
+      <div className={`bg-dark text-white p-4 ${styles.sidebar} ${sidebarOpen ? 'd-block' : 'd-none'} d-md-block`}>
         <h2 className={styles.logo}>Admin</h2>
         <ul className="nav flex-column admin_dashboard" style={{ marginLeft: '-14px' }}>
-          <li>
-            <a href="/admin/dashboard" className="nav-link text-white">
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="/admin/add-product" className="nav-link text-warning">
-              Add Product
-            </a>
-          </li>
-          <li>
-            <a href="/admin/all-products" className="nav-link text-white">
-              Manage Products
-            </a>
-          </li>
+          <li><a href="/admin/dashboard" className="nav-link text-white">Dashboard</a></li>
+          <li><a href="/admin/add-product" className="nav-link text-warning">Add Tent</a></li>
+          <li><a href="/admin/all-products" className="nav-link text-white">Manage Tents</a></li>
         </ul>
       </div>
 
-
-      {/* Main Content */}
+      {/* Main */}
       <div className={`p-4 w-100 ${styles.main}`}>
-        <h2 className={styles.addProduct_title}>Add New Product</h2>
+        <h2 className={styles.addProduct_title}>Add New Tent</h2>
+
         <div className={styles.form}>
-          {[
-            { label: 'Product Name', value: product.name, onChange: handleNameChange, name: 'name' },
-            { label: 'Slug', value: product.slug, readOnly: true, name: 'slug' },
-            { label: 'Category', value: product.category, name: 'category' },
-          ].map((field, i) => (
-            <div key={i} className={styles.formGroup}>
-              <label>{field.label}</label>
-              <input
-                type="text"
-                value={field.value}
-                onChange={field.onChange || (e => setProduct(p => ({ ...p, [field.name]: e.target.value })))}
-                readOnly={field.readOnly}
-                className={`${styles.input} ${field.readOnly ? styles.readonly : ''}`}
-              />
-            </div>
-          ))}
-
-          {['description', 'longDesc1', 'longDesc2', 'longDesc3'].map((desc, i) => (
-            <div key={i} className={styles.formGroup}>
-              <label>{desc === 'description' ? 'Short Description' : `Long Description ${i}`}</label>
-              <textarea
-                value={product[desc]}
-                onChange={e => setProduct(p => ({ ...p, [desc]: e.target.value }))}
-                className={styles.textarea}
-              />
-            </div>
-          ))}
-
           <div className={styles.formGroup}>
-            <label>MRP</label>
+            <label>Tent Name</label>
             <input
-              type="number"
-              value={product.mrp}
-              onChange={e => handleMrpOrDiscountChange('mrp', e.target.value)}
+              type="text"
+              value={tent.name}
+              onChange={e => handleChange('name', e.target.value)}
               className={styles.input}
             />
           </div>
 
           <div className={styles.formGroup}>
-            <label>Discount (%)</label>
-            <input
-              type="number"
-              value={product.discount}
-              onChange={e => handleMrpOrDiscountChange('discount', e.target.value)}
-              className={styles.input}
+            <label>Description</label>
+            <textarea
+              value={tent.description}
+              onChange={e => handleChange('description', e.target.value)}
+              className={styles.textarea}
             />
           </div>
 
           <div className={styles.formGroup}>
-            <label>Price (auto-calculated)</label>
+            <label>Price (₹ / day)</label>
             <input
               type="number"
-              value={product.price}
-              readOnly
-              className={`${styles.input} ${styles.readonly}`}
+              value={tent.price}
+              onChange={e => handleChange('price', e.target.value)}
+              className={styles.input}
             />
           </div>
 
           <div className={styles.imageUploadBox}>
-            <label>Upload Product Image</label>
-            <button onClick={handleUpload} className={styles.uploadButton}>Upload Image</button>
+            <label>Upload Image</label>
+            <button onClick={handleUpload} className={styles.uploadButton}>Upload</button>
             {imageUrl && (
               <div className={styles.imagePreviewWrapper}>
                 <img src={imageUrl} alt="Preview" className={styles.imagePreview} />
@@ -207,7 +129,7 @@ const AddProduct = () => {
             )}
           </div>
 
-          <button onClick={handleSave} className={styles.saveButton}>Save Product</button>
+          <button onClick={handleSave} className={styles.saveButton}>Save Tent</button>
         </div>
       </div>
     </div>
